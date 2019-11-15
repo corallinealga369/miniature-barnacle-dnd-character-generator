@@ -1,0 +1,67 @@
+#! python3
+import random
+import time
+#import pygame
+#I want to store the randomly generated stats
+#for a character in a dictionary
+
+Strength=0
+Dexterity=0
+Constitution=0
+Intelligence=0
+Wisdom=0
+Charisma=0
+Name="Jane Doe"
+Gender="F"
+Race="Human"
+Age=0
+
+print("Welcome!")
+print('Let\'s generate base stats for your character.')
+Name=input("First things first, what is your character's name?")
+time.sleep(2)
+Gender=input("What is your character's gender? Please enter: [Man,Woman,X]")
+time.sleep(2)
+Race=input("What is your character's race? ")
+time.sleep(2)
+Age=input("What is your character's age? ")
+time.sleep(2)
+print("Great, let's roll your stats.")
+
+Strength=random.randint(1,20)
+Dexterity=random.randint(1,20)
+Constitution=random.randint(1,20)
+Intelligence=random.randint(1,20)
+Wisdom=random.randint(1,20)
+Charisma=random.randint(1,20)
+#establish a dictionary for the character stats
+mycharacter = {
+     "Name":Name,
+     "Race":Race,
+     "Gender":Gender,
+     "Age":Age,
+     "Strength":Strength,
+     "Dexterity":Dexterity,
+     "Constitution":Constitution,
+     "Intelligence":Intelligence,
+     "Wisdom":Wisdom,
+     "Charisma":Charisma,
+}
+
+#wait before printing the stats
+time.sleep(2)
+
+#print each entry in the dictionary for character
+print("Here are the stats for your character")
+for key, value in mycharacter.items():
+    print(f"{key}:{value}")
+
+#create a text file with the character information
+print('Your character is being written to a raw text file.')
+f = open("mycharacter.txt","w")
+f.write( str(mycharacter) )
+f.close()
+
+#Wait a moment and then say goodbye
+time.sleep(2)
+print("Bye!")
