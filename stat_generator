@@ -1,0 +1,57 @@
+#! python3
+import random
+import time
+#I want to store the randomly generated stats
+#for a character in a dictionary
+
+Strength=0
+Dexterity=0
+Constitution=0
+Intelligence=0
+Wisdom=0
+Charisma=0
+name="Jane Doe"
+gender="F"
+race="Human"
+
+#Take user input
+print("Welcome!")
+print('Let\'s generate base stats for your character.')
+name=input("First things first, what is your character's name? ")
+time.sleep(2)
+gender=input("What is your character's gender? Please enter: [Man,Woman,X]")
+time.sleep(2)
+race=input("What is your character's race? ")
+time.sleep(2)
+print("Great, let's roll your stats.")
+
+#randomly select a number between 1 and 20, simulating a d20 roll
+Strength=random.randint(1,20)
+Dexterity=random.randint(1,20)
+Constitution=random.randint(1,20)
+Intelligence=random.randint(1,20)
+Wisdom=random.randint(1,20)
+Charisma=random.randint(1,20)
+
+#Print the stats and traits for 
+print("Here are the stats for "+name+" the "+gender+" "+race+": ")
+print("Strength: "+ str(Strength))
+print("Dexterity: "+ str(Dexterity))
+print("Constitution: " +str(Constitution))
+print("Intelligence: "+str(Intelligence))
+print("Wisdom: "+ str(Wisdom))
+print("Charisma: "+str(Charisma))
+
+#lets make a dictionary for the character
+mycharacter = {
+     "Name":name,
+     "race":race,
+     "gender":gender,
+     "Strength":Strength,
+     "Dexterity":Dexterity,
+     "Constitution":Constitution,
+     "Intelligence":Intelligence,
+     "Wisdom":Wisdom,
+     "Charisma":Charisma,
+}
+
