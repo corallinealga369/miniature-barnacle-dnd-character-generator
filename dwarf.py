@@ -4,11 +4,14 @@
 import random
 import time
 import csv
-#import pygame
+
 #I want to store the randomly generated stats
 #for a character in a dictionary
+
+#these are initial values
 Name="Jane"
 ClanName="Doe"
+
 #These are the default stats for the character
 #we are initializing values
 #If the stat is zero you know there was an issue
@@ -20,7 +23,8 @@ Wisdom=0
 Charisma=0
 MyRace="Dwarf"
 MyGender="Female"
-MySize="Medium"
+
+
 #traits asigned by race or influenced by it
 Alignment=["Lawful-Good","Lawful-Nuetral","Lawful-Evil","Neutral-Good","Neutral-Nuetral","Neutral-Evil","Chaotic-Good","Chaotic-Neutral","Chaotic-Evil"]
 Gender=["Male","Female"]
@@ -31,7 +35,7 @@ Age=21
 MyLifeStage="Adult"
 Height=50
 MyTool="Filler"
-Race=["Dwarf","Gnome","Dragonborn", "Half-Elf","Teifling","Half-Orc","Halfling","Elf","Human"]
+MySize="Medium"
 LifeStage=["Child", "Adult","Elderly"]
 MaleNames=['Adrik', 'Alberich', 'Baern', 'Barendd', 'Brottor', 'Bruenor', 'Dain', 'Darrak']
 FemaleNames=['Eldeth', 'Falkrunn', 'Finellen', 'Gunnloda', 'Gurdis', 'Helja', 'Hlin'] 
@@ -50,13 +54,17 @@ Wisdom=random.randint(1,20)
 Charisma=random.randint(1,20)
 
 print("Welcome!")
-print('Let\'s a dwarf.')
+print('Let\'s generate a dwarf! ')
 
 time.sleep(2)
 print("Choosing a random alignment for "+Name+".")
 MyAlignment=random.choice(Alignment)
 print("Generating a gender...")
+
+#choose a gender
 MyGender=random.choice(Gender)
+
+#choose a first and last name considering the gender
 if MyGender=="Female":
     Name=random.choice(FemaleNames)
 else:
@@ -68,13 +76,17 @@ MyRace="Dwarf"
 
 #dwarves are medium
 MySize="Medium"
+
 #dwarves get a racil bonus to constitution
 Constitution=Constitution+2
+
 #dwarves base walk speed is 25
 MySpeed=25
+
 #dwarves get proficiency in one of the following three tools
 ToolProf=["Smithing","Brewing","Masonry"]
 MyTool=random.choice(ToolProf)
+
 #dwarves are between 4-5 feet tall
 Height=random.randint(40,60)
 MyRaceNotes="Dwarves get +2 to constitution (already added). And are usually lawful.Speed isn't impacted by heavy armor."    
@@ -123,10 +135,6 @@ print("\n")
 for key, value in mycharacter.items():
     print(f"{key}:{value}")
 print("\n")
-#this creates a raw text file.
-#f = open("mycharacter.txt","w")
-#f.write( str(mycharacter) )
-#f.close()
 
 #This creates a comma seperated value file
 w = csv.writer(open( "mycharacter.csv", "w"))
