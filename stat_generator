@@ -1,6 +1,7 @@
 #! python3
 import random
 import time
+#import pygame
 #I want to store the randomly generated stats
 #for a character in a dictionary
 
@@ -10,43 +11,35 @@ Constitution=0
 Intelligence=0
 Wisdom=0
 Charisma=0
-name="Jane Doe"
-gender="F"
-race="Human"
+Name="Jane Doe"
+Gender="F"
+Race="Human"
+Age=0
 
-#Take user input
 print("Welcome!")
 print('Let\'s generate base stats for your character.')
-name=input("First things first, what is your character's name? ")
+Name=input("First things first, what is your character's name?")
 time.sleep(2)
-gender=input("What is your character's gender? Please enter: [Man,Woman,X]")
+Gender=input("What is your character's gender? Please enter: [Man,Woman,X]")
 time.sleep(2)
-race=input("What is your character's race? ")
+Race=input("What is your character's race? ")
+time.sleep(2)
+Age=input("What is your character's age? ")
 time.sleep(2)
 print("Great, let's roll your stats.")
 
-#randomly select a number between 1 and 20, simulating a d20 roll
 Strength=random.randint(1,20)
 Dexterity=random.randint(1,20)
 Constitution=random.randint(1,20)
 Intelligence=random.randint(1,20)
 Wisdom=random.randint(1,20)
 Charisma=random.randint(1,20)
-
-#Print the stats and traits for 
-print("Here are the stats for "+name+" the "+gender+" "+race+": ")
-print("Strength: "+ str(Strength))
-print("Dexterity: "+ str(Dexterity))
-print("Constitution: " +str(Constitution))
-print("Intelligence: "+str(Intelligence))
-print("Wisdom: "+ str(Wisdom))
-print("Charisma: "+str(Charisma))
-
-#lets make a dictionary for the character
+#establish a dictionary for the character stats
 mycharacter = {
-     "Name":name,
-     "race":race,
-     "gender":gender,
+     "Name":Name,
+     "Race":Race,
+     "Gender":Gender,
+     "Age":Age,
      "Strength":Strength,
      "Dexterity":Dexterity,
      "Constitution":Constitution,
@@ -55,3 +48,20 @@ mycharacter = {
      "Charisma":Charisma,
 }
 
+#wait before printing the stats
+time.sleep(2)
+
+#print each entry in the dictionary for character
+print("Here are the stats for your character")
+for key, value in mycharacter.items():
+    print(f"{key}:{value}")
+
+#create a text file with the character information
+print('Your character is being written to a raw text file.')
+f = open("mycharacter.txt","w")
+f.write( str(mycharacter) )
+f.close()
+
+#Wait a moment and then say goodbye
+time.sleep(2)
+print("Bye!")
