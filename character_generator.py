@@ -2,13 +2,8 @@
 import random
 import time
 import csv
-#import pygame
-#I want to store the randomly generated stats
-#for a character in a dictionary
+
 Name="Jane Doe"
-#These are the default stats for the character
-#we are initializing values
-#If the stat is zero you know there was an issue
 Strength=0
 Dexterity=0
 Constitution=0
@@ -28,19 +23,9 @@ Age=21
 MyLifeStage="Adult"
 Height=50
 #MyTool="Filler"
-Race=["Dwarf","Gnome","Dragonborn", "Half-Elf","Teifling","Half-Orc","Halfling","Elf","Human"]
+Race=["Dwarf","Halfling","Elf","Human"]
 LifeStage=["Child", "Adult","Elderly"]
 
-
-
-#We will generate the stats before doing anything else so that racial bonusus are auto-added
-#for example, dwarves get +2 constitution
-Strength=random.randint(1,20)
-Dexterity=random.randint(1,20)
-Constitution=random.randint(1,20)
-Intelligence=random.randint(1,20)
-Wisdom=random.randint(1,20)
-Charisma=random.randint(1,20)
 
 print("Welcome!")
 print('Let\'s generate base stats for your character.')
@@ -50,209 +35,327 @@ print("Choosing a random alignment for "+Name+".")
 MyAlignment=random.choice(Alignment)
 print("Generating a gender...")
 MyGender=random.choice(Gender)
-time.sleep(2)
-print("Choosing a race... ")
-time.sleep(2)
-MyRace=random.choice(Race)
-print("Picking an age... ")
-time.sleep(2)
 
 
-
-if MyRace=="Human":
-    Age=random.randint(6,90)
-    MySize="Medium"
-    MySpeed=30
-    Height=random.randint(52,75)
-    Strength=Strength+1
-    Dexterity=Dexterity+1
-    Constitution=Constitution+1
-    Intelligence=Intelligence+1
-    Wisdom=Wisdom+1
-    Charisma=Charisma+1    
-    MyRaceNotes="Humans have no particular alignment tendency. They get +1 to all abilities and get an additional language."
-    
-    if Age < 18:
-        MyLifeStage="Child"
-    elif Age > 65:
-        MyLifeStage="Elderly"
-    else: 
-        MyLifeStage="Adult"
-
-elif MyRace=="Dwarf":
-    Age=random.randint(6,350)
-    #dwarves are medium
-    MySize="Medium"
-    #dwarves get a racil bonus to constitution
-    Constitution=Constitution+2
-    #dwarves base walk speed is 25
-    MySpeed=25
-    #dwarves get proficiency in one of the following three tools
-    #ToolProf=["Smithing","Brewing","Masonry"]
-    #MyTool=random.choice(ToolProf)
-    #dwarves are between 4-5 feet tall
+#classes
+class Dwarf:
+  def __init__(self, Name ):
+    self.Name = Name
+    self.Size="Medium"
+    self.Speed=25
     Height=random.randint(40,60)
-    MyRaceNotes="Dwarves get +2 to constitution (already added). And are usually lawful.Speed isn't impacted by heavy armor."
-    if Age < 18:
-        MyLifeStage="Child"
-    elif Age > 200:
-        MyLifeStage="Elderly"
-    else:
-        MyLifeStage="Adult"
+    self.Height=Height
+    Age=random.randint(6,350)
+    self.Age=Age 
 
-elif MyRace=="Halfling":
-    #We choose some racially influenced traits here
-    Age=random.randint(6,250)
-    MySize="Small"
-    MySpeed=25
+    ToolProf=["Smithing","Brewing","Masonry"]
+    self.MyTool= random.choice(ToolProf)
+
+    Strength=random.randint(1,20)
+    Dexterity=random.randint(1,20)
+    Constitution=random.randint(1,20)
+    #Dwarf bonus
+    Constitution=Constitution+2
+    Intelligence=random.randint(1,20)
+    Wisdom=random.randint(1,20)
+    Charisma=random.randint(1,20)
+
+    self.Strength=Strength
+    self.Dexterity=Dexterity
+    self.Constitution=Constitution
+    self.Intelligence=Intelligence
+    self.Wisdom=Wisdom
+    self.Charisma=Charisma
+    self.Alignment=MyAlignment
+    self.Gender=MyGender
+    self.dict={
+
+    Name:self.Name,
+    Size:self.Size,
+    Speed:self.Speed,
+    Height:self.Height,
+    Age:self.Age,
+    Strength:self.Strength,
+    Dexterity:self.Dexterity,
+    Constitution:self.Constitution,
+    Intelligence:self.Intelligence,
+    Wisdom:self.Wisdom,
+    Charisma:self.Charisma,
+    Alignment:self.Alignment,
+    Gender:self.Gender,
+
+    }
+    
+  def introduce(self):
+    print("Hello my name is " + self.Name)
+
+  def stats(self):
+    print("Strength:"+str(self.Strength))
+    print("Dexterity:"+str(self.Dexterity))
+    print("Consitution:"+str(self.Constitution))
+    print("Intelligence:"+str(self.Intelligence))
+    print("Wisdom:"+str(self.Wisdom))
+    print("Charisma:"+str(self.Charisma))
+
+  def print_dict(self):
+    #This will print all the values for the character that are included in the dictionary
+    time.sleep(2)
+    print("Here are the stats and notes for your character")
+    print("\n")
+    for key, value in character.dict.items():
+        print(f"{key}:{value}")
+    print("\n")
+    
+class Human:
+  def __init__(self, name ):
+    self.Name = Name
+    self.Size="Medium"
+    self.Speed=30
+    Height=random.randint(52,75)
+    self.Height=Height
+    Age=random.randint(6,90)
+    self.Age=Age 
+
+    #Human Bonus is +1 all ability
+    Strength=random.randint(1,20)
+    Strength=Strength+1
+    Dexterity=random.randint(1,20)
+    Dexterity=Dexterity+1
+    Constitution=random.randint(1,20)
+    Constitution=Constitution+1
+    Intelligence=random.randint(1,20)
+    Intelligence=+1
+    Wisdom=random.randint(1,20)
+    Wisdom=+1
+    Charisma=random.randint(1,20)
+    Charisma=+1
+
+    self.Strength=Strength
+    self.Dexterity=Dexterity
+    self.Constitution=Constitution
+    self.Intelligence=Intelligence
+    self.Wisdom=Wisdom
+    self.Charisma=Charisma
+    self.Alignment=MyAlignment
+    self.Gender=MyGender
+    self.dict={
+
+        0:self.Name,
+        1:self.Size,
+        2:self.Speed,
+        3:self.Height,
+        4:self.Age,
+        5:self.Strength,
+        6:self.Dexterity,
+        7:self.Constitution,
+        8:self.Intelligence,
+        9:self.Wisdom,
+        10:self.Charisma,
+        11:self.Alignment,
+        12:self.Gender,
+
+    }
+    
+  def introduce(self):
+    print("Hello my name is " + self.Name)
+  def stats(self):
+    print("Strength:"+str(self.Strength))
+    print("Dexterity:"+str(self.Dexterity))
+    print("Consitution:"+str(self.Constitution))
+    print("Intelligence:"+str(self.Intelligence))
+    print("Wisdom:"+str(self.Wisdom))
+    print("Charisma:"+str(self.Charisma))
+  def print_dict(self):
+    #This will print all the values for the character that are included in the dictionary
+    time.sleep(2)
+    print("Here are the stats and notes for your character")
+    print("\n")
+    for key, value in character.dict.items():
+        print(f"{key}:{value}")
+    print("\n")
+    
+class Halfling:
+  def __init__(self, Name ):
+    self.Name = Name
+    self.Size="Small"
+    self.Speed=25
     Height=random.randint(30,42)
+    self.Height=Height
+    Age=random.randint(6,250)
+    self.Age=Age 
     MyRaceNotes="Halflings tend to be lawful good. They get a +2 to Dexterity.They are fluent and literate in Common and Halfling."
+    self.MyRaceNotes=MyRaceNotes
+    
+    Strength=random.randint(1,20)
+    Dexterity=random.randint(1,20)
     Dexterity=Dexterity+2
-    #we determine what life stage this makes the being based on their race
-    if Age < 20:
-        MyLifeStage="Child"
-    elif Age > 150:
-        MyLifeStage="Elderly"
-    else: 
-        MyLifeStage="Adult"
+    Constitution=random.randint(1,20)
+    Intelligence=random.randint(1,20)
+    Wisdom=random.randint(1,20)
+    Charisma=random.randint(1,20)
 
-elif MyRace=="Elf":
+    self.Strength=Strength
+    self.Dexterity=Dexterity
+    self.Constitution=Constitution
+    self.Intelligence=Intelligence
+    self.Wisdom=Wisdom
+    self.Charisma=Charisma
+    self.Alignment=MyAlignment
+    self.Gender=MyGender
+    self.dict={
+
+    Name:self.Name,
+    Size:self.Size,
+    Speed:self.Speed,
+    Height:self.Height,
+    Age:self.Age,
+    Strength:self.Strength,
+    Dexterity:self.Dexterity,
+    Constitution:self.Constitution,
+    Intelligence:self.Intelligence,
+    Wisdom:self.Wisdom,
+    Charisma:self.Charisma,
+    Alignment:self.Alignment,
+    Gender:self.Gender,
+
+    }
+    
+  def introduce(self):
+    print("Hello my name is " + self.Name)
+  def stats(self):
+    print("Strength:"+str(self.Strength))
+    print("Dexterity:"+str(self.Dexterity))
+    print("Consitution:"+str(self.Constitution))
+    print("Intelligence:"+str(self.Intelligence))
+    print("Wisdom:"+str(self.Wisdom))
+    print("Charisma:"+str(self.Charisma))
+  def print_dict(self):
+    #This will print all the values for the character that are included in the dictionary
+    time.sleep(2)
+    print("Here are the stats and notes for your character")
+    print("\n")
+    for key, value in character.dict.items():
+        print(f"{key}:{value}")
+    print("\n")
+
+class Elf:
+  def __init__(self, Name ):
     Age=random.randint(6,750)
-    MySize="Medium"
-    MySpeed=30
     Height=random.randint(60,72)
     MyRaceNotes="Elves value freedom, and lean towards the gentler aspects of chaos. They get a +2 Dexterity bonus."
-    Dexterity=Dexterity+2
-    if Age < 100:
-        MyLifeStage="Child"
-    elif Age > 650:
-        MyLifeStage="Elderly"
-    else:
-        MyLifeStage="Adult"    
+    self.Name = Name
+    self.Size="Medium"
+    self.Speed=30
+    self.Height=Height
+    self.Age=Age 
+    self.MyRaceNotes=MyRaceNotes
 
-elif MyRace=="Dragonborn":
-    Age=random.randint(1,80)
-    #this race needs an update to their racial traits other than age
-    #this filler was placed so functionality could be tested
-    MySize="Medium"
-    MySpeed=30
-    Height=random.randint(60,72)
-    MyRaceNotes=" Dragonborn Races Notes"
-    if Age < 15:
-        MyLifeStage="Child"
-    elif Age > 65:
-        MyLifeStage="Elderly"
-    else:
-        MyLifeStage="Adult"  
+    Strength=random.randint(1,20)
+    Dexterity=random.randint(1,20)
+    #Elves get a dex bonus of +2
+    Dexterity=+2
+    Constitution=random.randint(1,20)
+    Intelligence=random.randint(1,20)
+    Wisdom=random.randint(1,20)
+    Charisma=random.randint(1,20)
 
-elif MyRace=="Gnome":
-    Age=random.randint(6,20)
-    #this race needs an update to their racial traits other than age
-    #this filler was placed so functionality could be tested
-    MySize="Medium"
-    MySpeed=30
-    Height=random.randint(60,72)
-    MyRaceNotes=" Gnome Race Notes"
-    if Age < 20:
-        MyLifeStage="Child"
-    elif Age > 200:
-        MyLifeStage="Elderly"
-    else:
-        MyLifeStage="Adult" 
+    self.Strength=Strength
+    self.Dexterity=Dexterity
+    self.Constitution=Constitution
+    self.Intelligence=Intelligence
+    self.Wisdom=Wisdom
+    self.Charisma=Charisma
+    self.Alignment=MyAlignment
+    self.Gender=MyGender
+    self.dict={
 
-elif MyRace=="Half-Elf":
-    Age=random.randint(6,180)
-    #this race needs an update to their racial traits other than age
-    #this filler was placed so functionality could be tested
-    MySize="Medium"
-    MySpeed=30
-    Height=random.randint(60,72)
-    MyRaceNotes=" Race"
-    if Age < 20:
-        MyLifeStage="Child"
-    elif Age > 150:
-         MyLifeStage="Elderly"
-    else: 
-        MyLifeStage="Adult"    
+    Name:self.Name,
+    Size:self.Size,
+    Speed:self.Speed,
+    Height:self.Height,
+    Age:self.Age,
+    Strength:self.Strength,
+    Dexterity:self.Dexterity,
+    Constitution:self.Constitution,
+    Intelligence:self.Intelligence,
+    Wisdom:self.Wisdom,
+    Charisma:self.Charisma,
+    Alignment:self.Alignment,
+    Gender:self.Gender,
 
-elif MyRace=="Half-Orc":
-    Age=random.randint(6,75)
-    #this race needs an update to their racial traits other than age
-    #this filler was placed so functionality could be tested
-    MySize="Medium"
-    MySpeed=30
-    Height=random.randint(60,72)
-    MyRaceNotes=" Half Orc Race Notes"
-    if Age < 14:
-        MyLifeStage="Child"
-    elif Age > 60:
-        MyLifeStage="Elderly"
-    else: 
-        MyLifeStage="Adult"   
+    }
+  def introduce(self):
+    print("Hello my name is " + self.Name)
+  def stats(self):
+    print("Strength:"+str(self.Strength))
+    print("Dexterity:"+str(self.Dexterity))
+    print("Consitution:"+str(self.Constitution))
+    print("Intelligence:"+str(self.Intelligence))
+    print("Wisdom:"+str(self.Wisdom))
+    print("Charisma:"+str(self.Charisma))
+  def print_dict(self):
+    #This will print all the values for the character that are included in the dictionary
+    time.sleep(2)
+    print("Here are the stats and notes for your character")
+    print("\n")
+    for key, value in character.dict.items():
+        print(f"{key}:{value}")
+    print("\n")
 
-elif MyRace=="Teifling":
-    Age=random.randint(6,100)
-    #this race needs an update to their racial traits other than age
-    #this filler was placed so functionality could be tested
-    MySize="Medium"
-    MySpeed=30
-    Height=random.randint(60,72)
-    MyRaceNotes=" Teifling Race Notes"
-    if Age < 18:
-        MyLifeStage="Child"
-    elif Age > 70:
-        MyLifeStage="Elderly"
-    else:
-         MyLifeStage="Adult"  
+choice=input("Choose a Human (H) Dwarf(D) Elf (E) or Halfling (F) to begin.")   
+if choice == "H" or "h":
+    character=Human(Name)
+    character.introduce()
+    time.sleep(2)
+    character.stats()
+    time.sleep(2)
+    character.print_dict()
 
-#Here is the dictionary we store values in
-#establish a dictionary for the character stats
-mycharacter = {
-     "Name":Name,
-     "Aligned":MyAlignment,
-     "Race":MyRace,
-     "Gender":MyGender,
-     "Age":Age,
-     "Height":Height,
-     "Life Stage":MyLifeStage,
-     "Size":Size,
-     "Strength":Strength,
-     "Dexterity":Dexterity,
-     "Constitution":Constitution,
-     "Intelligence":Intelligence,
-     "Wisdom":Wisdom,
-     "Charisma":Charisma,
-     #"Tool Proficiency":MyTool,
-     "Racial Notes":MyRaceNotes,
-}
-print("\n")
-print("So your character "+Name+" is a "+MyAlignment+" "+str(Age)+" year old "+MyLifeStage+" "+MyRace+" "+MyGender+"." ) 
-print("Their size is "+MySize+" their speed is "+str(MySpeed)+" and their height is "+str(Height)+" inches.")
-print("\n")
-#print("They have proficiency in "+MyTool+" tools.")
-print("And there is a note here about their race:")
-print(MyRaceNotes)
-time.sleep(2)   
+elif choice=="D" or "d":
+    character=Dwarf(Name)
+    character.introduce()
+    time.sleep(2)
+    character.stats()
+    time.sleep(2)
+    character.print_dict()
+    
+elif choice=="E" or "e":
+    character=Elf(Name)
+    character.introduce()
+    time.sleep(2)
+    character.stats()
+    time.sleep(2)
+    character.print_dict()
 
+elif choice=="F" or "f":
+    character=Halfling(Name)
+    character.introduce()
+    time.sleep(2)
+    character.stats()
+    time.sleep(2)
+    character.print_dict()
+else:
+    print("Learn to read before you try to play DnD.")
 
-#This will print all the values for the character that are included in the dictionary
-time.sleep(2)
-print("Here are the stats and notes for your character")
-print("\n")
-for key, value in mycharacter.items():
-    print(f"{key}:{value}")
-print("\n")
+#this is not currently used in the script
+def make_text_file(character):
 #this creates a raw text file.
-f = open("mycharacter.txt","w")
-f.write( str(mycharacter) )
-f.close()
+  f = open("mycharacter.txt","w")
+  f.write( str(character.dict.items()) )
+  f.close()
 
+def make_csv_file(character):
 #This creates a comma seperated value file
-w = csv.writer(open( "mycharacter.csv", "w"))
-for key, val in mycharacter.items():
-    w.writerow([key, val])
-print("You now have a text file and csv with your character stats!")
-print("You can open the csv in Excel or Google Docs.")
+  w = csv.writer(open( "mycharacter.csv", "w"))
+  for key, val in character.dict.items():
+      w.writerow([key, val])
+  print("You now have a text file and csv with your character stats!")
+  print("You can open the csv in Excel or Google Docs.")
+  w.close()
 
-time.sleep(2)
-print("Bye!")
+filechoice=input("Would you like to print a CSV of your character to save? Enter 1 for yes, or any other key for no. ")
+if filechoice==1:
+  make_csv_file(character)
+  print("Thanks for saving your character! See you again later!")
+else: 
+  print("Thanks for using the character generator! Bye!")
